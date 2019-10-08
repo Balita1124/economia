@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Economia</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="commons/header :: header"></div>
+<div class="contenu">
+    <form th:action="@{/partners/create}" method="post" th:object="${partnerForm}">
+
+        <p th:if="${#fields.hasGlobalErrors()}"
+           th:each="error : ${#fields.errors('global')}" th:text="${error}">
+            Validation error
+        </p>
+
+        <label for="firstname">name</label><br/>
+        <input type="text" th:field="*{firstname}" id="firstname"><br/>
+        <p th:each="error: ${#fields.errors('firstname')}" th:text="${error}">Validation error</p>
+        <br/>
+        <label for="lastname">lastname</label><br/>
+        <input type="text" th:field="*{lastname}" id="lastname">
+        <p th:each="error: ${#fields.errors('lastname')}" th:text="${error}">Validation error</p>
+        <br/>
+        <label for="phone">phone</label><br/>
+        <input type="text" th:field="*{phone}" id="phone"><br/>
+        <p th:each="error: ${#fields.errors('phone')}" th:text="${error}">Validation error</p>
+        <br/>
+        <label for="email">email</label><br/>
+        <input type="text" th:field="*{email}" id="email"><br/>
+        <p th:each="error: ${#fields.errors('email')}" th:text="${error}">Validation error</p>
+        <br/>
+        <label for="account">account</label><br/>
+        <input type="text" th:field="*{account}" id="account"><br/>
+        <p th:each="error: ${#fields.errors('account')}" th:text="${error}">Validation error</p>
+        <br/>
+        <input type="submit" name="create" value="Add">
+    </form>
+    <ul>
+        <li><a th:href="@{/partners}">Partners List</a></li>
+    </ul>
+</div>
+</body>
+</html>

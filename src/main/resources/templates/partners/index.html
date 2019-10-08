@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Economia</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="commons/header :: header"></div>
+<div class="contenu">
+    <h3>Partners</h3>
+    <div th:if="${param.success}">
+        <span> Partner added successfully</span>
+    </div>
+    <div>
+        <a th:href="@{/partners/add}">Add</a>
+    </div>
+    <table border="1">
+        <tr>
+            <td>Name</td>
+            <td>Phone</td>
+            <td>Email</td>
+            <td>Account</td>
+        </tr>
+        <tr th:each="partner: ${partners}">
+            <td th:utext="${partner.firstname +  ' ' + partner.lastname}"></td>
+            <td th:utext="${partner.phone}"></td>
+            <td th:utext="${partner.email}"></td>
+            <td th:utext="${partner.account}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

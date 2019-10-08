@@ -15,8 +15,8 @@ public class MainController {
         return "main/index";
     }
 
-    @RequestMapping("/test")
+    @RequestMapping("/about")
     public String test(Model model){
-        return "main/index";
+        return "main/about";
     }
 }
