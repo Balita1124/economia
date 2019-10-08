@@ -1,0 +1,22 @@
+.b-header{
+    /*position: fixed;*/
+    /*display: block;*/
+    height: 75px;
+    border-bottom: 1px solid deepskyblue;
+    width: 100%;
+    /*background-color: rgba(0,166,229,0.36);*/
+    z-index: 9999;
+}
+.b-header ul li {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+}
+.off{
+    height: 77px;
+}
+.contenu{
+    min-height: 1000px;
+    border-top: 1px solid deepskyblue;
+    width: 100%;
+}

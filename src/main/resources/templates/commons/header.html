@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Economia</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:fragment="header" class="b-header">
+    <!--<div sec:authorize="isAuthenticated()">-->
+    <!--<ul>-->
+    <!--<li><a th:href="@{/logout}">Logout</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--<div sec:authorize="isAnonymous()">-->
+    <!--<ul style="list-style: none">-->
+    <!--<li><a th:href="@{/login}">Login</a></li>-->
+    <!--<li><a th:href="@{/signup}">Sign up</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+
+    <div>
+        <ul style="list-style: none">
+            <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
+            <li sec:authorize="isAnonymous()"><a th:href="@{/signup}">Sign up</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Partner</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
