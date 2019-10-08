@@ -8,10 +8,12 @@
 <body>
 <div th:replace="commons/header :: header"></div>
 <div class="contenu">
-    <form th:action="@{/register-user}" method="post" th:object="${signupRequest}">
+    <form th:action="@{/register-user}" method="post" th:object="${signUpRequest}">
+
         <p th:if="${#fields.hasGlobalErrors()}"
-           th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
-            error</p>
+           th:each="error : ${#fields.errors('global')}" th:text="${error}">
+            Validation error
+        </p>
 
         <label for="name">name</label><br/>
         <input type="text" th:field="*{name}" id="name"><br/>

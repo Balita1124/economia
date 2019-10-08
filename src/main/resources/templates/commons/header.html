@@ -22,10 +22,10 @@
 
     <div>
         <ul style="list-style: none">
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Partner</a></li>
             <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
             <li sec:authorize="isAnonymous()"><a th:href="@{/signup}">Sign up</a></li>
             <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Partner</a></li>
         </ul>
     </div>
 </div>
