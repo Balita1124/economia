@@ -42,7 +42,7 @@ public class User {
     private String password;
 
     @OneToMany(targetEntity=Account.class, mappedBy="user",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    Set<Account> accounts;
+    List<Account> accounts;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",

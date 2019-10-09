@@ -18,28 +18,24 @@
 
         <label for="name">name</label><br/>
         <input type="text" th:field="*{name}" id="name"><br/>
-        <p th:each="error: ${#fields.errors('firstname')}" th:text="${error}">Validation error</p>
+        <p th:each="error: ${#fields.errors('name')}" th:text="${error}">Validation error</p>
         <br/>
-        <label for="lastname">lastname</label><br/>
-        <input type="text" th:field="*{lastname}" id="lastname">
-        <p th:each="error: ${#fields.errors('lastname')}" th:text="${error}">Validation error</p>
+        <label for="number">number</label><br/>
+        <input type="text" th:field="*{number}" id="number">
+        <p th:each="error: ${#fields.errors('number')}" th:text="${error}">Validation error</p>
         <br/>
-        <label for="phone">phone</label><br/>
-        <input type="text" th:field="*{phone}" id="phone"><br/>
-        <p th:each="error: ${#fields.errors('phone')}" th:text="${error}">Validation error</p>
+        <label for="description">description</label><br/>
+        <input type="text" th:field="*{description}" id="description"><br/>
+        <p th:each="error: ${#fields.errors('description')}" th:text="${error}">Validation error</p>
         <br/>
-        <label for="email">email</label><br/>
-        <input type="text" th:field="*{email}" id="email"><br/>
-        <p th:each="error: ${#fields.errors('email')}" th:text="${error}">Validation error</p>
-        <br/>
-        <label for="account">account</label><br/>
-        <input type="text" th:field="*{account}" id="account"><br/>
-        <p th:each="error: ${#fields.errors('account')}" th:text="${error}">Validation error</p>
+        <label for="amount">amount</label><br/>
+        <input type="text" th:field="*{amount}" id="amount"><br/>
+        <p th:each="error: ${#fields.errors('amount')}" th:text="${error}">Validation error</p>
         <br/>
         <input type="submit" name="create" value="Add">
     </form>
     <ul>
-        <li><a th:href="@{/partners}">Partners List</a></li>
+        <li><a th:href="@{/profil}">Profil</a></li>
     </ul>
 </div>
 </body>

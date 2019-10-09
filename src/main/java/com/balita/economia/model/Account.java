@@ -1,5 +1,6 @@
 package com.balita.economia.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "accounts")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Account {
 
     @Id
@@ -19,7 +21,7 @@ public class Account {
     private String name;
     private String number;
     private String description;
-    private String amount;
+    private Double amount;
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
