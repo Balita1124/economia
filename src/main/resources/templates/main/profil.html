@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Show | Economia</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="commons/header :: header"></div>
+<div class="contenu">
+    <h3 th:text="${user.name}"></h3>
+    <div style="display: block; margin-bottom: 25px">
+        <p>name: <span th:text="${user.name}"></span></p>
+        <p>username: <span th:text="${user.username}"></span></p>
+        <p>email: <span th:text="${user.email}"></span></p>
+    </div>
+    <div style="display:block">
+        <div>
+            <a th:href="@{/accounts/add}">Add account</a>
+        </div>
+        <table border="1">
+            <tr>
+                <td>Name</td>
+                <td>number</td>
+                <td>amount</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr th:each="account: ${user.accounts}">
+                <td><a th:href="@{'/accounts/show/' + ${account.id}}"><span
+                        th:utext="${account.name}"></span></a></td>
+                <td th:utext="${account.number}"></td>
+                <td th:utext="${account.amount}"></td>
+                <td><a th:href="@{'/accounts/edit/' + ${account.id}}">Edit</a></td>
+                <td><a th:href="@{'/accounts/delete/' + ${account.id}}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

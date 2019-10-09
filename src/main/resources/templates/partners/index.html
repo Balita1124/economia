@@ -11,7 +11,7 @@
 <div class="contenu">
     <h3>Partners</h3>
     <div th:if="${param.success}">
-        <span> Partner added successfully</span>
+        <span>Success</span>
     </div>
     <div>
         <a th:href="@{/partners/add}">Add</a>
@@ -22,14 +22,28 @@
             <td>Phone</td>
             <td>Email</td>
             <td>Account</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr th:each="partner: ${partners}">
-            <td th:utext="${partner.firstname +  ' ' + partner.lastname}"></td>
+            <td><a th:href="@{'/partners/show/' + ${partner.id}}"><span
+                    th:utext="${partner.firstname +  ' ' + partner.lastname}"></span></a></td>
             <td th:utext="${partner.phone}"></td>
             <td th:utext="${partner.email}"></td>
             <td th:utext="${partner.account}"></td>
+            <td><a th:href="@{'/partners/edit/' + ${partner.id}}">Edit</a></td>
+            <td><a th:href="@{'/partners/delete/' + ${partner.id}}">Delete</a></td>
         </tr>
     </table>
+    <div th:if="${partners.totalPages > 0}">
+        <ul class="pagination">
+            <li th:each="pageNumber : ${pageNumbers}" style="display: inline-block;">
+                <a style="margin-right: 3px" th:href="@{/partners(size=${partners.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==partners.number + 1} ? active"></a>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

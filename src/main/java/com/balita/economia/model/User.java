@@ -1,16 +1,11 @@
 package com.balita.economia.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.*;
+import java.util.*;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
@@ -45,6 +40,9 @@ public class User {
     @NotBlank
     @Size(max = 100)
     private String password;
+
+    @OneToMany(targetEntity=Account.class, mappedBy="user",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    Set<Account> accounts;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",

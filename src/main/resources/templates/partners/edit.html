@@ -3,13 +3,13 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Add | Economia</title>
+    <title>Edit | Economia</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <div th:replace="commons/header :: header"></div>
 <div class="contenu">
-    <form th:action="@{/partners/create}" method="post" th:object="${partnerForm}">
+    <form th:action="@{'/partners/update/' + ${partner.id}}" method="post" th:object="${partner}">
 
         <p th:if="${#fields.hasGlobalErrors()}"
            th:each="error : ${#fields.errors('global')}" th:text="${error}">
@@ -36,7 +36,7 @@
         <input type="text" th:field="*{account}" id="account"><br/>
         <p th:each="error: ${#fields.errors('account')}" th:text="${error}">Validation error</p>
         <br/>
-        <input type="submit" name="create" value="Add">
+        <input type="submit" name="update" value="Edit">
     </form>
     <ul>
         <li><a th:href="@{/partners}">Partners List</a></li>

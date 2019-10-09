@@ -5,10 +5,12 @@ import com.balita.economia.model.Partner;
 import com.balita.economia.repository.PartnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -24,7 +26,40 @@ public class PartnerService {
         return partnerRepository.findAll(pageable);
     }
 
-    public Partner createPartner(Partner newPartner) {
+    public Page<Partner> partnerPaged(Pageable pageable) {
+
+        return partnerRepository.findAll(pageable);
+    }
+
+    public Page<Partner> partnerPagedList(Pageable pageable){
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Partner> partners = (List<Partner>) partnerRepository.findAll();
+        List<Partner> list;
+
+        if (partners.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, partners.size());
+            list = partners.subList(startItem, toIndex);
+        }
+
+        Page<Partner> partnerPage
+                = new PageImpl<Partner>(list, PageRequest.of(currentPage, pageSize), partners.size());
+
+        return partnerPage;
+    }
+
+    public Partner savePartner(Partner newPartner) {
         return partnerRepository.save(newPartner);
+    }
+
+    public Partner findPartnerById(Long partnerId) {
+        return partnerRepository.findById(partnerId).orElse(null);
+    }
+
+    public void deletePartner(Partner partner) {
+        partnerRepository.delete(partner);
     }
 }

@@ -9,15 +9,15 @@
 <body>
 <div th:replace="commons/header :: header"></div>
 <div class="contenu">
-    <form th:action="@{/partners/create}" method="post" th:object="${partnerForm}">
+    <form th:action="@{/accounts/create}" method="post" th:object="${accountForm}">
 
         <p th:if="${#fields.hasGlobalErrors()}"
            th:each="error : ${#fields.errors('global')}" th:text="${error}">
             Validation error
         </p>
 
-        <label for="firstname">name</label><br/>
-        <input type="text" th:field="*{firstname}" id="firstname"><br/>
+        <label for="name">name</label><br/>
+        <input type="text" th:field="*{name}" id="name"><br/>
         <p th:each="error: ${#fields.errors('firstname')}" th:text="${error}">Validation error</p>
         <br/>
         <label for="lastname">lastname</label><br/>
