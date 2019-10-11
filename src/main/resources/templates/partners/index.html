@@ -10,6 +10,13 @@
 <div th:replace="commons/header :: header"></div>
 <div class="contenu">
     <h3>Partners</h3>
+    <div class="search">
+        <form th:action="@{/partners}" method="get" th:object="${searchForm}">
+            <input type="text" th:field="*{keyword}" id="firstname">
+            <input type="submit" value="Search">
+        </form>
+        <a th:href="@{/partners}">Fermer</a>
+    </div>
     <div th:if="${param.success}">
         <span>Success</span>
     </div>

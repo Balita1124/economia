@@ -22,7 +22,8 @@ public class Account {
     private String number;
     private String description;
     private Double amount;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
 }

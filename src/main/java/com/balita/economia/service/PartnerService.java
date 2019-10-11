@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PartnerService {
@@ -19,23 +20,11 @@ public class PartnerService {
     @Autowired
     PartnerRepository partnerRepository;
 
-    public Page<Partner> partnerList(int page, int siza) {
-
-        Pageable pageable = PageRequest.of(page, siza);
-
-        return partnerRepository.findAll(pageable);
-    }
-
-    public Page<Partner> partnerPaged(Pageable pageable) {
-
-        return partnerRepository.findAll(pageable);
-    }
-
-    public Page<Partner> partnerPagedList(Pageable pageable){
+    public Page<Partner> partnerPagedList(Pageable pageable, String keyword) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<Partner> partners = (List<Partner>) partnerRepository.findAll();
+        List<Partner> partners = (keyword == null) ? (List<Partner>) partnerRepository.findAll() : partnerRepository.findAllByFirstnameContainsOrLastnameContains(keyword, keyword);
         List<Partner> list;
 
         if (partners.size() < startItem) {

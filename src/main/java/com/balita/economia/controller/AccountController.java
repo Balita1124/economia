@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -50,12 +47,48 @@ public class AccountController {
             return "redirect:/logout";
         }
         Account account = new Account();
-        account.setName(accountForm.getName());
-        account.setNumber(accountForm.getNumber());
-        account.setDescription(accountForm.getDescription());
-        account.setAmount(accountForm.getAmount());
+        account = accountForm.buildAccount(account);
         account.setUser(user);
         accountService.saveAccount(account);
+        return "redirect:/profil?success";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editAccount(@PathVariable("id") Long accountId, Model model) {
+        Account account = accountService.findAccountById(accountId);
+        if (account == null) {
+            return "commons/404";
+        }
+        model.addAttribute("account", account);
+        return "accounts/edit";
+    }
+
+    @PostMapping("/update/{id}")
+    public String createAccount(
+            @PathVariable("id") Long accountId,
+            @ModelAttribute("accountForm") @Valid AccountForm accountForm,
+            BindingResult result,
+            Model model) {
+
+        if (result.hasErrors()) {
+            return "accounts/edit";
+        }
+        Account oldAccount = accountService.findAccountById(accountId);
+        if (oldAccount == null) {
+            return "commons/404";
+        }
+        oldAccount = accountForm.buildAccount(oldAccount);
+        accountService.saveAccount(oldAccount);
+        return "redirect:/profil?success";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteAccount(@PathVariable("id") Long accountId, Model model) {
+        Account account = accountService.findAccountById(accountId);
+        if (account == null) {
+            return "commons/404";
+        }
+        accountService.deleteAccount(account);
         return "redirect:/profil?success";
     }
 }
