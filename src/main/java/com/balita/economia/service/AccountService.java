@@ -7,6 +7,8 @@ import com.balita.economia.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountService {
 
@@ -24,5 +26,9 @@ public class AccountService {
 
     public void deleteAccount(Account account) {
         accountRepository.delete(account);
+    }
+
+    public List<Account> findAccounts() {
+        return accountRepository.findAll();
     }
 }

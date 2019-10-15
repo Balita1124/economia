@@ -2,6 +2,7 @@ package com.balita.economia.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,9 +10,10 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "accounts")
-@Data
 @NoArgsConstructor
+@Data
 @AllArgsConstructor
+@EqualsAndHashCode(exclude="user")
 public class Account {
 
     @Id
@@ -25,5 +27,4 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
 }

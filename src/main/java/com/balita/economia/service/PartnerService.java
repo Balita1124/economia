@@ -51,4 +51,8 @@ public class PartnerService {
     public void deletePartner(Partner partner) {
         partnerRepository.delete(partner);
     }
+
+    public List<Partner> findPartners() {
+        return (List<Partner>)partnerRepository.findAll();
+    }
 }

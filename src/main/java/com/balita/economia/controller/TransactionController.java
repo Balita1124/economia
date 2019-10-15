@@ -5,6 +5,8 @@ import com.balita.economia.model.Transaction;
 import com.balita.economia.playload.PartnerForm;
 import com.balita.economia.playload.SearchForm;
 import com.balita.economia.playload.TransactionForm;
+import com.balita.economia.service.AccountService;
+import com.balita.economia.service.PartnerService;
 import com.balita.economia.service.TransactionService;
 import com.balita.economia.util.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,21 @@ public class TransactionController{
     @Autowired
     TransactionService transactionService;
 
+    @Autowired
+    AccountService accountService;
+
+    @Autowired
+    PartnerService partnerService;
+
     @ModelAttribute("searchForm")
     public SearchForm searchForm() {
         return new SearchForm();
+    }
+
+
+    @ModelAttribute("transactionForm")
+    public TransactionForm transactionForm() {
+        return new TransactionForm();
     }
 
     @GetMapping
@@ -55,6 +69,8 @@ public class TransactionController{
 
     @GetMapping("/add")
     public String addTransaction(Model model) {
+        model.addAttribute("transactionAccounts", accountService.findAccounts());
+        model.addAttribute("transactionPartners", partnerService.findPartners());
         return "transactions/add";
     }
 }

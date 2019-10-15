@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add | Economia</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="commons/header :: header"></div>
+<div class="contenu">
+    <form th:action="@{/transactions/create}" method="post" th:object="${transactionForm}">
+
+        <p th:if="${#fields.hasGlobalErrors()}"
+           th:each="error : ${#fields.errors('global')}" th:text="${error}">
+            Validation error
+        </p>
+
+        <label for="partner">Partner</label><br/>
+        <select th:field="*{partner}" id="partner">
+            <option th:each="partner: ${transactionPartners}" th:value="${partner}" th:text="${partner.lastname + ' ' + partner.lastname}" />
+        </select>
+        <p th:each="error: ${#fields.errors('partner')}" th:text="${error}">Validation error</p>
+        <br/>
+        <label for="account">Account</label><br/>
+        <select th:field="*{account}" id="account">
+            <option th:each="account: ${transactionAccounts}" th:value="${account}" th:text="${account.number}" />
+        </select>
+        <p th:each="error: ${#fields.errors('partner')}" th:text="${error}">Validation error</p>
+        <br/>
+        <label for="amount">Amount</label><br/>
+        <input type="text" th:field="*{amount}" id="amount">
+        <p th:each="error: ${#fields.errors('amount')}" th:text="${error}">Validation error</p>
+        <br/>
+        <label for="date">date</label><br/>
+        <input type="date" th:field="*{date}" id="date"><br/>
+        <p th:each="error: ${#fields.errors('date')}" th:text="${error}">Validation error</p>
+        <br/>
+        <label for="remarks">remarks</label><br/>
+        <input type="text" th:field="*{remarks}" id="remarks"><br/>
+        <p th:each="error: ${#fields.errors('remarks')}" th:text="${error}">Validation error</p>
+        <br/>
+        <input type="submit" name="create" value="Add">
+    </form>
+    <ul>
+        <li><a th:href="@{/partners}">Transactions List</a></li>
+    </ul>
+</div>
+</body>
+</html>

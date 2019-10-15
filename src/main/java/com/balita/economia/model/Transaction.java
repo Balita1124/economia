@@ -3,6 +3,7 @@ package com.balita.economia.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,6 +34,7 @@ public class Transaction {
     private Double amount;
 
     @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy hh:MM:ss")
     private Date date;
 
     private String remarks;
