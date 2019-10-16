@@ -18,7 +18,7 @@ import java.util.*;
 })
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(exclude="accounts")
+//@EqualsAndHashCode(exclude="accounts")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -31,4 +31,14 @@ public class AccountService {
     public List<Account> findAccounts() {
         return accountRepository.findAll();
     }
+
+    public Account makePayment(Account account, Double amount) {
+        account.setAmount(account.getAmount() + amount);
+        return account;
+    }
+
+    public Account makeWithdrawal(Account account, Double amount) {
+        account.setAmount(account.getAmount() - amount);
+        return account;
+    }
 }

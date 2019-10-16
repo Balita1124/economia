@@ -43,7 +43,7 @@ public class AccountController {
             return "accounts/add";
         }
         User user = userService.findUserById(currentUser.getId());
-        if(user == null){
+        if (user == null) {
             return "redirect:/logout";
         }
         Account account = new Account();
@@ -90,5 +90,15 @@ public class AccountController {
         }
         accountService.deleteAccount(account);
         return "redirect:/profil?success";
+    }
+
+    @GetMapping("/show/{id}")
+    public String showAccount(@PathVariable("id") Long accountId, Model model) {
+        Account account = accountService.findAccountById(accountId);
+        if (account == null) {
+            return "commons/404";
+        }
+        model.addAttribute("account", account);
+        return "accounts/show";
     }
 }

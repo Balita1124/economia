@@ -1,8 +1,9 @@
 package com.balita.economia.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,6 +14,8 @@ import java.util.Date;
 @Table(name = "transactions")
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(exclude="account")
+@ToString(exclude = "account")
 public class Transaction {
 
     @Id

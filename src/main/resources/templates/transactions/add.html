@@ -18,22 +18,28 @@
 
         <label for="partner">Partner</label><br/>
         <select th:field="*{partner}" id="partner">
-            <option th:each="partner: ${transactionPartners}" th:value="${partner}" th:text="${partner.lastname + ' ' + partner.lastname}" />
+            <option th:each="p: ${transactionPartners}" th:value="${p.id}" th:text="${p.firstname + ' ' + p.lastname}" />
         </select>
         <p th:each="error: ${#fields.errors('partner')}" th:text="${error}">Validation error</p>
         <br/>
         <label for="account">Account</label><br/>
         <select th:field="*{account}" id="account">
-            <option th:each="account: ${transactionAccounts}" th:value="${account}" th:text="${account.number}" />
+            <option th:each="a: ${transactionAccounts}" th:value="${a.id}" th:text="${a.name + ' - ' + a.number}" />
         </select>
-        <p th:each="error: ${#fields.errors('partner')}" th:text="${error}">Validation error</p>
+        <p th:each="error: ${#fields.errors('account')}" th:text="${error}">Validation error</p>
+        <br/>
+        <label for="transTypeEnum">Transaction Type</label><br/>
+        <select th:field="*{transTypeEnum}" id="transTypeEnum">
+            <option th:each="type: ${transTypes}" th:value="${type}" th:text="${type}" />
+        </select>
+        <p th:each="error: ${#fields.errors('transTypeEnum')}" th:text="${error}">Validation error</p>
         <br/>
         <label for="amount">Amount</label><br/>
         <input type="text" th:field="*{amount}" id="amount">
         <p th:each="error: ${#fields.errors('amount')}" th:text="${error}">Validation error</p>
         <br/>
         <label for="date">date</label><br/>
-        <input type="date" th:field="*{date}" id="date"><br/>
+        <input type="date" th:field="*{date}" th:value="*{date}" id="date" pattern="yyyy-MM-dd"><br/>
         <p th:each="error: ${#fields.errors('date')}" th:text="${error}">Validation error</p>
         <br/>
         <label for="remarks">remarks</label><br/>

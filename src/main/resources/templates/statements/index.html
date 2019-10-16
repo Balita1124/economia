@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Home | Economia</title>
+    <title>Statements | Economia</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
@@ -11,41 +11,44 @@
 <div class="contenu">
     <h3>Transactions</h3>
     <div class="search">
-        <form th:action="@{/transactions}" method="get" th:object="${searchForm}">
+        <form th:action="@{/statements}" method="get" th:object="${searchForm}">
             <input type="text" th:field="*{keyword}" id="keyword">
             <input type="submit" value="Search">
         </form>
-        <a th:href="@{/transactions}">Fermer</a>
+        <a th:href="@{/statements}">Fermer</a>
     </div>
     <div th:if="${param.success}">
         <span>Success</span>
     </div>
-    <div>
-        <a th:href="@{/transactions/add}">Add</a>
-    </div>
+    <!--<div>-->
+        <!--<a th:href="@{/statements/add}">Add</a>-->
+    <!--</div>-->
     <table border="1">
         <tr>
             <td>Name</td>
-            <td>Amount</td>
-            <td>Date</td>
+            <td>account</td>
+            <td>transaction</td>
+            <td>amount</td>
+            <td>date</td>
             <!--<td></td>-->
             <!--<td></td>-->
         </tr>
-        <tr th:each="transaction: ${transactions}">
-            <td th:utext="${transaction.partnerName}"></td>
-            <td th:utext="${transaction.account.name}"></td>
-            <td th:utext="${transaction.amount}"></td>
-            <td th:utext="${transaction.date}"></td>
+        <tr th:each="statement: ${statements}">
+            <td th:utext="${statement.name}"></td>
+            <td th:utext="${statement.account.name}"></td>
+            <td th:utext="${statement.transaction.partnerName}"></td>
+            <td th:utext="${statement.amount}"></td>
+            <td th:utext="${statement.date}"></td>
             <!--<td><a th:href="@{'/transactions/edit/' + ${transaction.id}}">Edit</a></td>-->
             <!--<td><a th:href="@{'/transactions/delete/' + ${transaction.id}}">Delete</a></td>-->
         </tr>
     </table>
-    <div th:if="${transactions.totalPages > 0}">
+    <div th:if="${statements.totalPages > 0}">
         <ul class="pagination">
             <li th:each="pageNumber : ${pageNumbers}" style="display: inline-block;">
-                <a style="margin-right: 3px" th:href="@{/transactions(size=${transactions.size}, page=${pageNumber})}"
+                <a style="margin-right: 3px" th:href="@{/statements(size=${statements.size}, page=${pageNumber})}"
                    th:text="${pageNumber}"
-                   th:class="${pageNumber==transactions.number + 1} ? active"></a>
+                   th:class="${pageNumber==statements.number + 1} ? active"></a>
             </li>
         </ul>
     </div>

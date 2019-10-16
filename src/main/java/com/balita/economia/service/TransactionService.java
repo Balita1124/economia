@@ -37,4 +37,8 @@ public class TransactionService {
 
         return transactionPage;
     }
+
+    public Transaction saveTransaction(Transaction newTrans) {
+        return transactionRepository.save(newTrans);
+    }
 }

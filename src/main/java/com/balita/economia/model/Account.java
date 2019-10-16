@@ -1,9 +1,6 @@
 package com.balita.economia.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(exclude="user")
+@ToString(exclude="user")
 public class Account {
 
     @Id
