@@ -9,7 +9,7 @@
 <body>
 <div th:replace="commons/header :: header"></div>
 <div class="contenu">
-    <form th:action="@{/transactions/create}" method="post" th:object="${transactionForm}">
+    <form th:action="@{/credits/create}" method="post" th:object="${creditForm}">
 
         <p th:if="${#fields.hasGlobalErrors()}"
            th:each="error : ${#fields.errors('global')}" th:text="${error}">
@@ -18,19 +18,19 @@
 
         <label for="partner">Partner</label><br/>
         <select th:field="*{partner}" id="partner">
-            <option th:each="p: ${transactionPartners}" th:value="${p.id}" th:text="${p.firstname + ' ' + p.lastname}" />
+            <option th:each="p: ${creditPartners}" th:value="${p.id}" th:text="${p.firstname + ' ' + p.lastname}" />
         </select>
         <p th:each="error: ${#fields.errors('partner')}" th:text="${error}">Validation error</p>
         <br/>
         <label for="account">Account</label><br/>
         <select th:field="*{account}" id="account">
-            <option th:each="a: ${transactionAccounts}" th:value="${a.id}" th:text="${a.name + ' - ' + a.number}" />
+            <option th:each="a: ${creditAccounts}" th:value="${a.id}" th:text="${a.name + ' - ' + a.number}" />
         </select>
         <p th:each="error: ${#fields.errors('account')}" th:text="${error}">Validation error</p>
         <br/>
         <label for="transTypeEnum">Transaction Type</label><br/>
         <select th:field="*{transTypeEnum}" id="transTypeEnum">
-            <option th:each="type: ${transTypes}" th:value="${type}" th:text="${type}" />
+            <option th:each="type: ${creditTypes}" th:value="${type}" th:text="${type}" />
         </select>
         <p th:each="error: ${#fields.errors('transTypeEnum')}" th:text="${error}">Validation error</p>
         <br/>
@@ -49,7 +49,7 @@
         <input type="submit" name="create" value="Add">
     </form>
     <ul>
-        <li><a th:href="@{/transactions}">Transactions List</a></li>
+        <li><a th:href="@{/credits}">Credits List</a></li>
     </ul>
 </div>
 </body>

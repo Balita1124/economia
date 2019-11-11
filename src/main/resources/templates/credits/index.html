@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Economia</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="commons/header :: header"></div>
+<div class="contenu">
+    <h3>Transactions</h3>
+    <div class="search">
+        <form th:action="@{/credits}" method="get" th:object="${searchForm}">
+            <input type="text" th:field="*{keyword}" id="keyword">
+            <input type="submit" value="Search">
+        </form>
+        <a th:href="@{/credits}">Fermer</a>
+    </div>
+    <div th:if="${param.success}">
+        <span>Success</span>
+    </div>
+    <div>
+        <a th:href="@{/credits/add}">Add</a>
+    </div>
+    <table border="1">
+        <tr>
+            <td>Name</td>
+            <td>Compte</td>
+            <td>Amount</td>
+            <td>Type</td>
+            <td>Date</td>
+            <!--<td></td>-->
+            <!--<td></td>-->
+        </tr>
+        <tr th:each="credit: ${credits}">
+            <td th:utext="${credit.partnerName}"></td>
+            <td th:utext="${credit.account.name}"></td>
+            <td th:utext="${credit.amount}"></td>
+            <td th:utext="${credit.transTypeEnum}"></td>
+            <td th:utext="${credit.date}"></td>
+            <!--<td><a th:href="@{'/transactions/edit/' + ${transaction.id}}">Edit</a></td>-->
+            <!--<td><a th:href="@{'/transactions/delete/' + ${transaction.id}}">Delete</a></td>-->
+        </tr>
+    </table>
+    <div th:if="${credits.totalPages > 0}">
+        <ul class="pagination">
+            <li th:each="pageNumber : ${pageNumbers}" style="display: inline-block;">
+                <a style="margin-right: 3px" th:href="@{/credits(size=${credits.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==credits.number + 1} ? active"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
