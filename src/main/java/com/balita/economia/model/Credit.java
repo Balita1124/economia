@@ -42,6 +42,14 @@ public class Credit {
 
     private String remarks;
 
+    private CreditStateEnum state;
+
+    private Double amountLeft;
+
+    @ManyToOne
+    @JoinColumn(name = "transaction_id", nullable = false)
+    private Transaction transaction;
+
     public Credit(Partner partner, Account account, @NotNull TransTypeEnum transTypeEnum, @NotNull Double amount, @NotNull Date date, String remarks) {
         this.partner = partner;
         this.partnerName = partner.getFirstname() + " " + partner.getLastname();

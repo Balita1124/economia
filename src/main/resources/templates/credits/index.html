@@ -30,7 +30,7 @@
             <td>Amount</td>
             <td>Type</td>
             <td>Date</td>
-            <!--<td></td>-->
+            <td></td>
             <!--<td></td>-->
         </tr>
         <tr th:each="credit: ${credits}">
@@ -39,7 +39,7 @@
             <td th:utext="${credit.amount}"></td>
             <td th:utext="${credit.transTypeEnum}"></td>
             <td th:utext="${credit.date}"></td>
-            <!--<td><a th:href="@{'/transactions/edit/' + ${transaction.id}}">Edit</a></td>-->
+            <td><a th:href="@{'/credits/pay/' + ${credit.id}}">Pay</a></td>
             <!--<td><a th:href="@{'/transactions/delete/' + ${transaction.id}}">Delete</a></td>-->
         </tr>
     </table>

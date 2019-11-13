@@ -2,6 +2,7 @@ package com.balita.economia.controller;
 
 import com.balita.economia.model.*;
 import com.balita.economia.playload.CreditForm;
+import com.balita.economia.playload.CreditPayForm;
 import com.balita.economia.playload.SearchForm;
 import com.balita.economia.playload.TransactionForm;
 import com.balita.economia.service.*;
@@ -16,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.WebParam;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -54,6 +56,11 @@ public class CreditController {
         CreditForm form = new CreditForm();
 //        form.setDate(new Date());
         return new CreditForm();
+    }
+
+    @ModelAttribute("creditPayForm")
+    public CreditPayForm creditPayForm() {
+        return new CreditPayForm();
     }
 
     @ModelAttribute("creditAccounts")
@@ -135,8 +142,44 @@ public class CreditController {
                 creditForm.getDate(),
                 creditForm.getRemarks()
         );
+        newCredit.setTransaction(transSaved);
+        newCredit.setAmountLeft(creditForm.getAmount());
+        newCredit.setState(CreditStateEnum.NEW);
         statementService.createStatement(transSaved);
         Credit creditSaved = creditService.saveCredit(newCredit);
+        return "redirect:/credits?success";
+    }
+
+    @GetMapping("/pay/{id}")
+    public String payCredit(@PathVariable("id") Long creditId, Model model) {
+//        Partner partner = partnerService.findPartnerById(partnerId);
+        Credit credit = creditService.findCreditById(creditId);
+        if (credit == null) {
+            return "commons/404";
+        }
+        CreditPayForm creditPayForm = new CreditPayForm();
+        creditPayForm.setDue(credit.getAmount());
+        creditPayForm.setLeft(credit.getAmountLeft());
+        creditPayForm.setAccount(credit.getAccount());
+        model.addAttribute("creditPayForm", creditPayForm);
+        model.addAttribute("credit", credit);
+        return "credits/edit";
+    }
+
+    @PostMapping("/pay/{id}")
+    public String processPay(@ModelAttribute("creditPayForm") @Valid CreditPayForm creditPayForm, @PathVariable("id") Long creditId, Model model, BindingResult result) {
+        Credit credit = creditService.findCreditById(creditId);
+        if (credit == null) {
+            return "commons/404";
+        }
+        if (result.hasErrors()) {
+            return "credits/edit";
+        }
+        if(credit.getTransTypeEnum() == TransTypeEnum.INCOME){
+            
+        }else if(credit.getTransTypeEnum() == TransTypeEnum.OUTGOING){
+
+        }
         return "redirect:/credits?success";
     }
 }

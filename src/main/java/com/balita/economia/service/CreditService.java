@@ -40,4 +40,8 @@ public class CreditService {
     public Credit saveCredit(Credit newCredit) {
         return creditRepository.save(newCredit);
     }
+
+    public Credit findCreditById(Long creditId) {
+        return creditRepository.findById(creditId).orElse(null);
+    }
 }
